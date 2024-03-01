@@ -1,0 +1,141 @@
+included: # paths to include during linting. `--path` is ignored if present.
+  - TVMaze
+  - TVMazeTests
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - /Pods
+
+analyzer_rules:
+ - unused_import
+
+opt_in_rules:
+  # - anyobject_protocol
+  - array_init
+  # - attributes
+  - closure_body_length
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  # - discouraged_optional_boolean
+  - empty_count
+  # - empty_string
+  # - empty_xctest_method
+  - explicit_init
+  # - fallthrough
+  # - fatal_error_message
+  # - first_where
+  - force_unwrapping
+  - function_default_parameter_at_end
+  # - identical_operands
+  # - implicit_return
+  # - implicitly_unwrapped_optional
+  # - joined_default_parameter
+  - legacy_random
+  # - let_var_whitespace
+  # - literal_expression_end_indentation
+  # - modifier_order
+  # - multiline_parameters
+  # - object_literal
+  # - operator_usage_whitespace
+  # - operator_whitespace
+  # - overridden_super_call
+  # - override_in_extension
+  # - private_action
+  # - prohibited_super_call
+  # - redundant_nil_coalescing
+  # - redundant_type_annotation
+  # - required_enum_case
+  # - single_test_class
+  # - sorted_first_last
+  # - static_operator
+  # - strict_fileprivate
+  # - toggle_bool
+  # - trailing_closure
+  # - unneeded_parentheses_in_closure_argument
+  # - untyped_error_in_catch
+  # - unused_private_declaration
+  # - vertical_parameter_alignment_on_call
+  - switch_case_on_newline
+  # - yoda_condition
+  - weak_delegate
+  - convenience_type
+
+disabled_rules:
+  - trailing_whitespace
+  # - cyclomatic_complexity
+
+weak_delegate: error
+
+force_cast: warning
+
+force_try:
+  severity: warning
+
+large_tuple:
+  warning: 2
+  error: 5
+
+empty_count:
+  severity: warning
+
+line_length: 140
+
+cyclomatic_complexity:
+  warning: 15
+  error: 40
+
+type_body_length:
+  - 300 # warning
+  - 480 # error
+
+file_length:
+  warning: 500
+  error: 1200
+
+type_name:
+  min_length: 1 # only warning
+  max_length: # warning and error
+    warning: 80
+    error: 100
+  excluded: iPhone # excluded via string
+
+identifier_name:
+  min_length: # only min_length
+    error: 1 # only error
+    warning: 1
+  excluded: # excluded via string array
+    - _id
+    - id
+    - qa
+    - URL
+    - Key
+    - iPadPro9_7Inch
+    - iPadPro10_5Inch
+    - iPadPro12_9Inch
+    - screen3_5Inch
+    - screen4_7Inch
+    - screen5_5Inch
+    - screen5_8Inch
+    - screen7_9Inch
+    - screen9_7Inch
+    - screen10_5Inch
+    - screen12_9Inch
+    - screen21_5Inch
+
+function_body_length:
+  warning: 60
+  error: 110
+
+custom_rules:
+  aviod_crashes:
+        regex: '(fatalError)'
+        message: "The app must not force itself to crash"
+        severity: error
+  no_unowned_in_project:
+        regex: "(unowned)"
+        message: "unowned has force unwrap and must be avoided"
+        severity: error
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji)
