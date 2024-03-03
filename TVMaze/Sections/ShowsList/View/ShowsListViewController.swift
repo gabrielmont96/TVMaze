@@ -47,7 +47,6 @@ class ShowsListViewController: UIViewController {
 extension ShowsListViewController {
     func setupBindings() {
         setupCollectionViewBindinds()
-        setupViewModelBindinds()
     }
     
     func setupCollectionViewBindinds() {
@@ -68,13 +67,5 @@ extension ShowsListViewController {
                 guard let searchText else { return }
                 self?.viewModel.searchForShows(using: searchText)
             }.store(in: &cancellableBag)
-    }
-    
-    func setupViewModelBindinds() {
-//        viewModel.$contentDetail
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] _ in
-//                self?.homeView.setCollectionViewUserInteractionEnabled()
-//            }.store(in: &cancellableBag)
     }
 }
