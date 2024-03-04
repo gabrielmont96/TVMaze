@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         #if DEBUG
-        if ProcessInfo.processInfo.environment["runningTests"] == "YES" {
+        if ProcessInfo.processInfo.environment["runningTests"] != nil {
             return
         }
         #endif

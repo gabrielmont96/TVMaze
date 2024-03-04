@@ -11,8 +11,8 @@ import SnapKit
 class ShowDetailSeasonTableViewCell: UITableViewCell {
     lazy var seasonNumberLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .lightGray
+        label.font = .bodyText
+        label.textColor = .bodyText
         return label
     }()
     
@@ -55,7 +55,7 @@ class ShowDetailSeasonTableViewCell: UITableViewCell {
     func setupLayout() {
         selectedBackgroundView = selectedView
         
-        backgroundColor = .defaultBackgroundColor
+        backgroundColor = .background
         
         stackView.addArrangedSubview(seasonNumberLabel)
         stackView.addArrangedSubview(arrowImageView)

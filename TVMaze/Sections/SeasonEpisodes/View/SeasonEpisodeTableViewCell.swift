@@ -18,7 +18,7 @@ class SeasonEpisodeTableViewCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
+        label.font = .bodyText
         label.textColor = .lightGray
         return label
     }()
@@ -26,14 +26,14 @@ class SeasonEpisodeTableViewCell: UITableViewCell {
     lazy var seasonEpisodeInfoView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .defaultBackgroundColor
+        view.backgroundColor = .background
         return view
     }()
     
     lazy var seasonEpisodeInfoLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .titleText
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -42,7 +42,7 @@ class SeasonEpisodeTableViewCell: UITableViewCell {
     lazy var summaryLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
+        label.font = .bodyText
         label.textColor = .lightGray
         return label
     }()
@@ -84,7 +84,7 @@ class SeasonEpisodeTableViewCell: UITableViewCell {
     }
     
     func setupLayout() {
-        contentView.backgroundColor = .defaultBackgroundColor
+        contentView.backgroundColor = .background
         
         vStackView.addArrangedSubview(posterImageView)
         vStackView.addArrangedSubview(nameLabel)
@@ -161,7 +161,7 @@ class SeasonEpisodeTableViewCell: UITableViewCell {
         nameLabel.text = "Name\n\(episode.name)"
         nameLabel.highlight(searchedText: "Name", font: .systemFont(ofSize: 16, weight: .semibold))
         
-        if let summary = episode.summary?.replacingHTML() {
+        if let summary = episode.summary?.replacingHTML(), !summary.isEmpty {
             summaryLabel.text = "Summary\n\(summary)"
             summaryLabel.highlight(searchedText: "Summary", font: .systemFont(ofSize: 16, weight: .semibold))
         }

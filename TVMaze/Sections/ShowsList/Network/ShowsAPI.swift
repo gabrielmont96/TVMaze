@@ -29,6 +29,6 @@ extension ShowsAPI: NetworkAPI {
     }
     
     var method: HTTPMethod {
-        .get
+        return .get
     }
 }

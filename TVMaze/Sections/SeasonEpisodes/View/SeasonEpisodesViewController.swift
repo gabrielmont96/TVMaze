@@ -14,11 +14,17 @@ class SeasonEpisodesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .defaultBackgroundColor
+        tableView.backgroundColor = .background
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(SeasonEpisodeTableViewCell.self, forCellReuseIdentifier: SeasonEpisodeTableViewCell.identifier)
         return tableView
+    }()
+    
+    lazy var feedbackView: FeedbackView = {
+        let feedbackView = FeedbackView()
+        feedbackView.configure(.loading)
+        return feedbackView
     }()
     
     var viewModel: SeasonEpisodesViewModel
@@ -53,11 +59,12 @@ class SeasonEpisodesViewController: UIViewController {
             .sink { [weak self] didFinishFetch in
                 guard didFinishFetch != nil else { return }
                 self?.tableView.reloadData()
+                self?.feedbackView.remove()
             }.store(in: &cancellableBag)
     }
     
     func setupLayout() {
-        view.backgroundColor = .defaultBackgroundColor
+        view.backgroundColor = .background
         
         view.addSubview(tableView)
         
@@ -67,6 +74,8 @@ class SeasonEpisodesViewController: UIViewController {
             make.trailing.equalTo(view.snp.trailing).inset(16)
             make.bottom.equalTo(view.snp.bottom)
         }
+        
+        feedbackView.show(in: view)
     }
 }
 
@@ -88,6 +97,8 @@ extension SeasonEpisodesViewController: UITableViewDataSource {
 extension SeasonEpisodesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.episodes[indexPath.row].isExpanded.toggle()
-        tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
     }
 }

@@ -9,38 +9,59 @@ import UIKit
 import Combine
 
 class ShowsListViewController: UIViewController {
-    lazy var showsView: ShowsView = {
-        let homeView = ShowsView()
-        homeView.configure(contents: viewModel.$shows)
-        return homeView
+    lazy var collectionView: ShowsCollectionView = {
+        var collectionView = ShowsCollectionView()
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
     
-    var viewModel: ShowsListViewModel
+    lazy var feedbackView: FeedbackView = {
+        let feedbackView = FeedbackView()
+        feedbackView.configure(.loading)
+        return feedbackView
+    }()
+    
+    var viewModel: ShowsListViewModel<ShowFavoritesRepository>
     var cancellableBag = Set<AnyCancellable>()
     
-    init(viewModel: ShowsListViewModel) {
+    init(viewModel: ShowsListViewModel<ShowFavoritesRepository>) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
-        viewModel = ShowsListViewModel()
+        viewModel = ShowsListViewModel(provider: .remote)
         super.init(coder: aDecoder)
-    }
-    
-    override func loadView() {
-        self.view = showsView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        viewModel.startFetch()
+        setupLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
         navigationController?.setNavigationBarHidden(true, animated: false)
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setupLayout() {
+        view.backgroundColor = .background
+        
+        view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(16)
+            make.leading.equalTo(view.snp.leading).inset(16)
+            make.trailing.equalTo(view.snp.trailing).inset(16)
+            make.bottom.equalTo(view.snp.bottom)
+        }
+        
+        if viewModel.provider == .remote {
+            feedbackView.show(in: view)
+        }
     }
 }
 
@@ -50,22 +71,35 @@ extension ShowsListViewController {
     }
     
     func setupCollectionViewBindinds() {
-        showsView.$selectedShow
+        collectionView.setupContentsBinding(shows: viewModel.$shows)
+        
+        collectionView.$selectedShow
             .sink { [weak self] show in
                 guard let show else { return }
                 self?.viewModel.didSelectShow(show)
             }.store(in: &cancellableBag)
         
-        showsView.$currentRow
+        collectionView.$currentRow
             .sink { [weak self] row in
                 guard let row else { return }
-                self?.viewModel.fetchMoviesIfNecessary(row: row)
+                self?.viewModel.fetchShowsIfNecessary(row: row)
             }.store(in: &cancellableBag)
         
-        showsView.$searchText
+        collectionView.$searchText
             .sink { [weak self] searchText in
                 guard let searchText else { return }
                 self?.viewModel.searchForShows(using: searchText)
             }.store(in: &cancellableBag)
+        
+        viewModel.$showFeedback
+            .sink { [weak self] showFeedback in
+                guard let self, let showFeedback else {
+                    self?.feedbackView.remove(withDelay: 0.3)
+                    return
+                }
+                self.feedbackView.configure(showFeedback)
+                self.feedbackView.show(in: self.view)
+            }
+            .store(in: &cancellableBag)
     }
 }

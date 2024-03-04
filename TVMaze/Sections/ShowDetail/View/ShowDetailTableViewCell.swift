@@ -19,32 +19,32 @@ class ShowDetailTableViewCell: UITableViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .white
+        label.font = .titleText
+        label.textColor = .titleText
         return label
     }()
     
     lazy var seriesAirsLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .lightGray
+        label.font = .bodyText
+        label.textColor = .bodyText
         return label
     }()
     
     lazy var genresLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .lightGray
+        label.font = .bodyText
+        label.textColor = .bodyText
         return label
     }()
     
     lazy var summaryLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
-        label.textColor = .lightGray
+        label.font = .bodyText
+        label.textColor = .bodyText
         return label
     }()
     
@@ -67,7 +67,7 @@ class ShowDetailTableViewCell: UITableViewCell {
     }
     
     func setupLayout() {
-        contentView.backgroundColor = .defaultBackgroundColor
+        contentView.backgroundColor = .background
         
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(seriesAirsLabel)
@@ -105,7 +105,7 @@ class ShowDetailTableViewCell: UITableViewCell {
             genresLabel.highlight(searchedText: "Genres")
         }
         
-        if let summary = model.summary?.replacingHTML() {
+        if let summary = model.summary?.replacingHTML(), !summary.isEmpty {
             summaryLabel.text = "Summary\n\(summary)"
             summaryLabel.highlight(searchedText: "Summary")
         }

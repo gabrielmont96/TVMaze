@@ -25,9 +25,9 @@ class SearchHeaderCollectionView: UICollectionReusableView {
      }
     
     func setupLayout() {
-        backgroundColor = .defaultBackgroundColor
-        searchBar.barTintColor = .defaultBackgroundColor
-        searchBar.tintColor = .black
+        backgroundColor = .background
+        searchBar.barTintColor = .searchBarBarTint
+        searchBar.tintColor = .searchBarTint
         
         let attributes: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.lightGray
@@ -35,8 +35,8 @@ class SearchHeaderCollectionView: UICollectionReusableView {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         
         let textField = searchBar.value(forKey: "searchField") as? UITextField ?? UITextField()
-        textField.textColor = .black
-        textField.backgroundColor = .lightGray
+        textField.textColor = .searchBarTextFieldText
+        textField.backgroundColor = .searchBarTextFieldBackground
         
         addSubview(searchBar)
         

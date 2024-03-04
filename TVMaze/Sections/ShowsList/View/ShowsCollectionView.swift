@@ -25,12 +25,12 @@ class ShowsCollectionView: UICollectionView {
     init() {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        flowLayout.minimumLineSpacing = CollectionViewConstants.minimumLineSpacing.cgFloat
+        flowLayout.minimumLineSpacing = 25
         flowLayout.sectionHeadersPinToVisibleBounds = true
         super.init(frame: .zero, collectionViewLayout: flowLayout)
         delegate = self
         dataSource = self
-        backgroundColor = .defaultBackgroundColor
+        backgroundColor = .background
         showsVerticalScrollIndicator = false
         register()
     }
@@ -109,7 +109,7 @@ extension ShowsCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding = CollectionViewConstants.horizontal.cgFloat
+        let padding: CGFloat = 16
         let width = (collectionView.frame.size.width - padding) / 2
         return CGSize(width: width, height: width * 1.45)
     }
@@ -125,5 +125,6 @@ extension ShowsCollectionView: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchText = ""
+        searchBar.resignFirstResponder()
     }
 }

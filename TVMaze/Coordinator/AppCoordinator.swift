@@ -16,10 +16,8 @@ class AppCoordinator {
     }
     
     func start() {
-        let coordinator = ShowsListCoordinator()
+        let coordinator = TabBarCoordinator()
         self.coordinator = coordinator
-        let navigation = UINavigationController(rootViewController: coordinator.viewController)
-        coordinator.navigationController = navigation
-        window.rootViewController = navigation
+        window.rootViewController = coordinator.viewController
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ShowModel: Decodable {
+struct ShowModel: Decodable, Identifiable {
     let id: Int
     let name: String
     let genres: [String]
@@ -21,7 +21,7 @@ struct ShowModel: Decodable {
 }
 
 struct ShowImage: Decodable {
-    let medium, original: String
+    let medium: String
 }
 
 struct ShowSchedule: Decodable {

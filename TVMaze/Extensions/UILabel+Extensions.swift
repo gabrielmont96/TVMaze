@@ -8,7 +8,7 @@
 import UIKit
 
 extension UILabel {
-    func highlight(searchedText: String, color: UIColor = .white, font: UIFont = .systemFont(ofSize: 17, weight: .bold)) {
+    func highlight(searchedText: String, color: UIColor = .titleText, font: UIFont = .systemFont(ofSize: 17, weight: .bold)) {
         guard let txtLabel = self.text else {
             return
         }

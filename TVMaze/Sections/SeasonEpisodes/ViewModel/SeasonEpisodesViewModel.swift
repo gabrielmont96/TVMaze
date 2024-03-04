@@ -27,6 +27,7 @@ class SeasonEpisodesViewModel {
                 episodes = seasonEpisodes
                 didFinishFetch = true
             case .failure(let error):
+                // handle error
                 print(error)
             }
         }

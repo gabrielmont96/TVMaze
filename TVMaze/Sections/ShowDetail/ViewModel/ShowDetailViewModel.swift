@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShowDetailViewModel {
+class ShowDetailViewModel<Repository: RepositoryProtocol> where Repository.T == ShowModel {
     enum Sections {
         case details
         case seasons([ShowSeasonsModel])
@@ -34,16 +34,23 @@ class ShowDetailViewModel {
     var sections: [Sections] = [.details]
     @Published var didFinishFetch: Bool?
     @Published var selectedEpisode: Int?
-    
     @Published var viewDidDisappear: Bool?
+    
+    let favoritesRepository: Repository
+    var isFavorite: Bool = false
     
     let show: ShowModel
     
     private let service: NetworkService<ShowsAPI>
     
-    init(show: ShowModel, service: NetworkService<ShowsAPI> = NetworkService<ShowsAPI>()) {
+    init(show: ShowModel,
+         service: NetworkService<ShowsAPI> = NetworkService<ShowsAPI>(),
+         favoritesRepository: Repository = ShowFavoritesRepository.shared) {
         self.show = show
         self.service = service
+        self.favoritesRepository = favoritesRepository
+        self.isFavorite = favoritesRepository.isOnStorage(show)
+        _ = favoritesRepository.get()
     }
     
     func fetchSeasons() {
@@ -53,8 +60,19 @@ class ShowDetailViewModel {
                 sections.append(.seasons(seasons))
                 didFinishFetch = true
             case .failure(let error):
+                // handle error
                 print(error)
             }
         }
+    }
+    
+    func setFavorite() {
+        if !isFavorite {
+            favoritesRepository.save(show)
+        } else {
+            favoritesRepository.delete(show)
+        }
+        isFavorite.toggle()
+        
     }
 }

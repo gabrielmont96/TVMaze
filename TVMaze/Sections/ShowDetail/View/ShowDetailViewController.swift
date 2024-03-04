@@ -14,7 +14,7 @@ class ShowDetailViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .defaultBackgroundColor
+        tableView.backgroundColor = .background
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ShowDetailTableViewCell.self, forCellReuseIdentifier: ShowDetailTableViewCell.identifier)
@@ -25,16 +25,22 @@ class ShowDetailViewController: UIViewController {
     lazy var seasionHeaderSeactionLabel = {
         let label = UILabel()
         label.text = "Seasons"
-        label.backgroundColor = .defaultBackgroundColor
+        label.backgroundColor = .background
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.textColor = .white
         return label
     }()
     
-    var viewModel: ShowDetailViewModel
+    lazy var feedbackView: FeedbackView = {
+        let feedbackView = FeedbackView()
+        feedbackView.configure(.loading)
+        return feedbackView
+    }()
+    
+    var viewModel: ShowDetailViewModel<ShowFavoritesRepository>
     var cancellableBag = Set<AnyCancellable>()
     
-    init(viewModel: ShowDetailViewModel) {
+    init(viewModel: ShowDetailViewModel<ShowFavoritesRepository>) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -52,6 +58,7 @@ class ShowDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        setupRightBarButton(isFavorite: viewModel.isFavorite)
         setupBindings()
         viewModel.fetchSeasons()
     }
@@ -59,17 +66,37 @@ class ShowDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        tabBarController?.tabBar.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         if isMovingFromParent {
             viewModel.viewDidDisappear = true
+            tabBarController?.tabBar.isHidden = false
         }
     }
     
+    func setupRightBarButton(isFavorite: Bool) {
+        let image = {
+            if isFavorite {
+                UIImage(systemName: "heart.fill")?.withTintColor(.red, renderingMode: .alwaysOriginal)
+            } else {
+                UIImage(systemName: "heart")?.withTintColor(.red, renderingMode: .alwaysOriginal)
+            }
+        }()
+        let barButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(favoriteButtonTapped))
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    @objc
+    func favoriteButtonTapped() {
+        viewModel.setFavorite()
+        setupRightBarButton(isFavorite: viewModel.isFavorite)
+    }
+    
     func setupLayout() {
-        view.backgroundColor = .defaultBackgroundColor
+        view.backgroundColor = .background
         
         view.addSubview(tableView)
         
@@ -79,6 +106,8 @@ class ShowDetailViewController: UIViewController {
             make.trailing.equalTo(view.snp.trailing).inset(16)
             make.bottom.equalTo(view.snp.bottom)
         }
+        
+        feedbackView.show(in: view)
     }
     
     func setupBindings() {
@@ -86,6 +115,7 @@ class ShowDetailViewController: UIViewController {
             .sink { [weak self] didFinishFetch in
                 guard didFinishFetch != nil else { return }
                 self?.tableView.reloadData()
+                self?.feedbackView.remove()
             }.store(in: &cancellableBag)
     }
 }

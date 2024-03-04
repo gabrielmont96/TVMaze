@@ -20,8 +20,8 @@ class ShowCollectionViewCell: UICollectionViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: ShowCollectionViewCellConstants.fontSize.cgFloat)
-        label.textColor = .white
+        label.font = .showListCell
+        label.textColor = .titleText
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.7
@@ -47,7 +47,7 @@ class ShowCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         imageView.snp.makeConstraints { [weak self] make in
             guard let self else { return }
-            make.height.equalTo(CollectionViewHeaderConstants.imageHeight.cgFloat)
+            make.height.equalTo(240)
             make.width.equalTo(self.contentView.frame.width)
             make.top.equalTo(self.contentView.snp.top)
             make.left.equalTo(self.contentView.snp.left)
@@ -56,7 +56,7 @@ class ShowCollectionViewCell: UICollectionViewCell {
 
         titleLabel.snp.makeConstraints { [weak self] make in
             guard let self else { return }
-            make.top.equalTo(self.imageView.snp.bottom).offset(ShowCollectionViewCellConstants.top.cgFloat)
+            make.top.equalTo(self.imageView.snp.bottom).offset(8)
             make.left.equalTo(self.contentView.snp.left)
             make.right.equalTo(self.contentView.snp.right)
             make.bottom.equalTo(self.contentView.snp.bottom)

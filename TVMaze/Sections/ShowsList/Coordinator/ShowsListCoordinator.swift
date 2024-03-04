@@ -8,7 +8,13 @@
 import UIKit
 import Combine
 
+enum ShowsListProvider {
+    case remote
+    case favorites
+}
+
 class ShowsListCoordinator: Coordinator {
+    
     var childCoordinator: Coordinator?
     var viewController: UIViewController
     var navigationController: UINavigationController?
@@ -16,8 +22,8 @@ class ShowsListCoordinator: Coordinator {
     var viewModelCancellableBag = Set<AnyCancellable>()
     var childCoordinatorCancellableBag = Set<AnyCancellable>()
     
-    init() {
-        let viewModel = ShowsListViewModel()
+    init(provider: ShowsListProvider) {
+        let viewModel = ShowsListViewModel(provider: provider)
         viewController = ShowsListViewController(viewModel: viewModel)
         setupObservable(for: viewModel.$selectedShow)
     }

@@ -30,14 +30,14 @@ class ShowsView: UIView {
     }
     
     func setupLayout() {
-        backgroundColor = .defaultBackgroundColor
+        backgroundColor = .background
         addSubview(collectionView)
         
         collectionView.snp.makeConstraints { [weak self] make in
             guard let self else { return }
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
-            make.left.equalTo(self.snp.left).inset(CollectionViewConstants.horizontal.cgFloat)
-            make.right.equalTo(self.snp.right).inset(CollectionViewConstants.horizontal.cgFloat)
+            make.left.equalTo(self.snp.left).inset(16)
+            make.right.equalTo(self.snp.right).inset(16)
             make.bottom.equalTo(self.snp.bottom)
         }
     }
@@ -50,9 +50,5 @@ class ShowsView: UIView {
     
     func configure(contents: Published<[ShowModel]>.Publisher) {
         collectionView.setupContentsBinding(shows: contents)
-    }
-    
-    func setCollectionViewUserInteractionEnabled() {
-        collectionView.isUserInteractionEnabled = true
     }
 }
