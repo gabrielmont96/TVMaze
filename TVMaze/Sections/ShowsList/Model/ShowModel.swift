@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ShowModel: Decodable, Identifiable {
+struct ShowModel: Decodable {
     let id: Int
     let name: String
     let genres: [String]

@@ -102,7 +102,7 @@ class ShowsListViewModel<Repository: RepositoryProtocol> where Repository.T == S
                 showFeedback = nil
             }
         case .favorites:
-            shows = favoritesRepository.get().filter { $0.name.starts(with: text) }
+            shows = favoritesRepository.get().filter { $0.name.lowercased().starts(with: text.lowercased()) }
         }
     }
     

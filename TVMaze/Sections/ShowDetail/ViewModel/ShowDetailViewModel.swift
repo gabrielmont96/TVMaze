@@ -8,7 +8,7 @@
 import Foundation
 
 class ShowDetailViewModel<Repository: RepositoryProtocol> where Repository.T == ShowModel {
-    enum Sections {
+    enum Sections: Equatable {
         case details
         case seasons([ShowSeasonsModel])
         
@@ -28,6 +28,10 @@ class ShowDetailViewModel<Repository: RepositoryProtocol> where Repository.T == 
             case .seasons(let seasons):
                 return seasons.count
             }
+        }
+        
+        static func == (lhs: ShowDetailViewModel<Repository>.Sections, rhs: ShowDetailViewModel<Repository>.Sections) -> Bool {
+            return lhs.title == lhs.title && lhs.numberOfRows == lhs.numberOfRows
         }
     }
     
@@ -50,7 +54,6 @@ class ShowDetailViewModel<Repository: RepositoryProtocol> where Repository.T == 
         self.service = service
         self.favoritesRepository = favoritesRepository
         self.isFavorite = favoritesRepository.isOnStorage(show)
-        _ = favoritesRepository.get()
     }
     
     func fetchSeasons() {
@@ -73,6 +76,5 @@ class ShowDetailViewModel<Repository: RepositoryProtocol> where Repository.T == 
             favoritesRepository.delete(show)
         }
         isFavorite.toggle()
-        
     }
 }

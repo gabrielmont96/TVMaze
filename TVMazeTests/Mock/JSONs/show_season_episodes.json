@@ -1,0 +1,114 @@
+[
+    {
+        "id": 136,
+        "url": "https://www.tvmaze.com/episodes/136/arrow-2x01-city-of-heroes",
+        "name": "City of Heroes",
+        "season": 2,
+        "number": 1,
+        "type": "regular",
+        "airdate": "2013-10-09",
+        "airtime": "20:00",
+        "airstamp": "2013-10-10T00:00:00+00:00",
+        "runtime": 60,
+        "rating": {
+            "average": 7.3
+        },
+        "image": {
+            "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/1/4151.jpg",
+            "original": "https://static.tvmaze.com/uploads/images/original_untouched/1/4151.jpg"
+        },
+        "summary": "<p>Diggle and Felicity travel to Lian Yu in search of Oliver who left Starling City after The Undertaking. Convinced to return home, Oliver finds that things are in worse shape than he thought - Isabel Rochev is preparing a hostile takeover of Queen Consolidated, Thea refuses to visit Moira in jail, Roy is trying to fill the void left by the Arrow's absence, and Laurel is working with the District Attorney's office to take down the vigilante. Meanwhile, flashbacks to the island show Slade, Shado and Oliver in a desperate situation.</p>",
+        "_links": {
+            "self": {
+                "href": "https://api.tvmaze.com/episodes/136"
+            },
+            "show": {
+                "href": "https://api.tvmaze.com/shows/4"
+            }
+        }
+    },
+    {
+        "id": 137,
+        "url": "https://www.tvmaze.com/episodes/137/arrow-2x02-identity",
+        "name": "Identity",
+        "season": 2,
+        "number": 2,
+        "type": "regular",
+        "airdate": "2013-10-16",
+        "airtime": "20:00",
+        "airstamp": "2013-10-17T00:00:00+00:00",
+        "runtime": 60,
+        "rating": {
+            "average": 7
+        },
+        "image": {
+            "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/1/4152.jpg",
+            "original": "https://static.tvmaze.com/uploads/images/original_untouched/1/4152.jpg"
+        },
+        "summary": "<p>Oliver finds out the medicine that is being sent to Glades Memorial is being hijacked by thieves. Without an influx of supplies, the hospital will close. Roy attempts to stop the thieves, but he fails and is arrested by Officer Lance. Oliver gets into a heated battle with China White and her new partner, Ben Turner, AKA the Bronze Tiger, over the supplies. Meanwhile, Laurel makes plans to catch the Arrow, and Thea gives Roy an ultimatum.</p>",
+        "_links": {
+            "self": {
+                "href": "https://api.tvmaze.com/episodes/137"
+            },
+            "show": {
+                "href": "https://api.tvmaze.com/shows/4"
+            }
+        }
+    },
+    {
+        "id": 139,
+        "url": "https://www.tvmaze.com/episodes/139/arrow-2x04-crucible",
+        "name": "Crucible",
+        "season": 2,
+        "number": 4,
+        "type": "regular",
+        "airdate": "2013-10-30",
+        "airtime": "20:00",
+        "airstamp": "2013-10-31T00:00:00+00:00",
+        "runtime": 60,
+        "rating": {
+            "average": 7.2
+        },
+        "image": {
+            "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/1/4154.jpg",
+            "original": "https://static.tvmaze.com/uploads/images/original_untouched/1/4154.jpg"
+        },
+        "summary": "<p>Oliver discovers a man who goes by the name \"The Mayor\" is bringing illegal guns in to The Glades, so Oliver sponsors a \"Cash for Guns\" event to help clean up the city. Unfortunately, The Mayor crashes the event with his gang and seriously injures Sin. The Canary is furious when she learns her friend is in the hospital and sets out for revenge. Meanwhile, Felicity stuns Oliver with a bit of information about the Canary, Donner asks Laurel to dinner, and Diggle reconnects with an old friend.</p>",
+        "_links": {
+            "self": {
+                "href": "https://api.tvmaze.com/episodes/139"
+            },
+            "show": {
+                "href": "https://api.tvmaze.com/shows/4"
+            }
+        }
+    },
+    {
+        "id": 140,
+        "url": "https://www.tvmaze.com/episodes/140/arrow-2x05-league-of-assassins",
+        "name": "League of Assassins",
+        "season": 2,
+        "number": 5,
+        "type": "regular",
+        "airdate": "2013-11-06",
+        "airtime": "20:00",
+        "airstamp": "2013-11-07T01:00:00+00:00",
+        "runtime": 60,
+        "rating": {
+            "average": 7.3
+        },
+        "image": {
+            "medium": "https://static.tvmaze.com/uploads/images/medium_landscape/1/4155.jpg",
+            "original": "https://static.tvmaze.com/uploads/images/original_untouched/1/4155.jpg"
+        },
+        "summary": "<p>While Oliver tends to the Canary's wounds, he tries to get her to talk about where she came from but she refuses. However, after Oliver and the Canary are attacked at the Queen mansion by a trained killer from the League of Assassins, she confesses to how she's connected with the nefarious group. Meanwhile with Moira facing multiple counts of murder and conspiracy for her part in the destruction of The Glades, the Assistant District Attorney offers her a choice - plead guilty now and avoid the death penalty or take your chances in court. Thea begs her mother to fight for her life but Moira seems resolute about taking the offer. Meanwhile, Oliver is furious with Laurel for joining the prosecution's team on his mother's case.</p>",
+        "_links": {
+            "self": {
+                "href": "https://api.tvmaze.com/episodes/140"
+            },
+            "show": {
+                "href": "https://api.tvmaze.com/shows/4"
+            }
+        }
+    }
+]
