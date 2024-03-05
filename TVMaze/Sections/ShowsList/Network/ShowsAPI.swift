@@ -24,7 +24,7 @@ extension ShowsAPI: NetworkAPI {
         case .episodes(let id):
             return "/seasons/\(id)/episodes"
         case .search(let text):
-            return "/search/shows?q=\(text)"
+            return "/search/shows?q=\(text.replacingOccurrences(of: " ", with: "%20"))"
         }
     }
     

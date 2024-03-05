@@ -68,6 +68,7 @@ class FeedbackView: UIView {
     }
     
     func show(in view: UIView) {
+        guard !isDescendant(of: view) else { return }
         translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self)
         snp.makeConstraints { make in
@@ -79,6 +80,7 @@ class FeedbackView: UIView {
     }
     
     func remove(withDelay delay: CGFloat? = nil) {
+        guard superview != nil else { return }
         if let delay {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
                 self?.removeFromSuperview()

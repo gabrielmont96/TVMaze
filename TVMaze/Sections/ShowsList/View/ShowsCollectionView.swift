@@ -12,6 +12,7 @@ class ShowsCollectionView: UICollectionView {
     lazy var shows: [ShowModel] = [] {
         didSet {
             reloadData()
+            setContentOffset(.zero, animated: true)
         }
     }
     

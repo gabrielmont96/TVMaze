@@ -94,7 +94,7 @@ extension ShowsListViewController {
         viewModel.$showFeedback
             .sink { [weak self] showFeedback in
                 guard let self, let showFeedback else {
-                    self?.feedbackView.remove(withDelay: 0.3)
+                    self?.feedbackView.remove(withDelay: self?.viewModel.provider == .remote ? 0.3 : 0)
                     return
                 }
                 self.feedbackView.configure(showFeedback)
