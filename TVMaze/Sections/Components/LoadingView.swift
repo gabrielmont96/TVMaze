@@ -81,7 +81,7 @@ class FeedbackView: UIView {
     
     func remove(withDelay delay: CGFloat? = nil) {
         guard superview != nil else { return }
-        if let delay {
+        if let delay, delay > 0 {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
                 self?.removeFromSuperview()
             }
